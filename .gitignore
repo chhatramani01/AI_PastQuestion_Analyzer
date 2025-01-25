@@ -1,0 +1,4 @@
+echo "
+*.pyc
+__pycache__/
+" > .gitignore
