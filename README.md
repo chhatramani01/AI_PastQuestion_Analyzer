@@ -1,7 +1,7 @@
 # AI Past Question Paper Extractor Tool
 
 ![Web Interface]()  
-*(You can add a banner image here later)*
+
 
 ---
 
