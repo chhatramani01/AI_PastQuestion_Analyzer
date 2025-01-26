@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Question Extractor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="text-center mb-0">AI Question Extractor</h1>
+            <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                <i class="fas fa-cog"></i> Settings
+            </button>
+        </div>
+
+        <!-- Upload Form -->
+        <div class="card shadow">
+            <div class="card-body">
+                <form id="uploadForm" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Upload PDF</label>
+                        <input type="file" class="form-control" id="file" name="file" accept="application/pdf" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="chapter" class="form-label">Chapter Name</label>
+                        <input type="text" class="form-control" id="chapter" name="chapter" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="topic" class="form-label">Topic</label>
+                        <input type="text" class="form-control" id="topic" name="topic" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-file-upload"></i> Extract Questions
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Process State -->
+        <div id="processState" class="mt-3" style="display: none;">
+            <h4>Process State:</h4>
+            <div id="stateMessages" class="alert alert-info"></div>
+        </div>
+
+        <!-- Output Box -->
+        <div id="outputBox" class="card shadow mt-4" style="display: none;">
+            <div class="card-body">
+                <h2 class="card-title">Analyzed Questions</h2>
+                <pre id="outputContent" class="bg-light p-3"></pre>
+                <a id="downloadLink" href="#" class="btn btn-success">
+                    <i class="fas fa-download"></i> Download PDF
+                </a>
+            </div>
+        </div>
+
+        <!-- PDF Embed -->
+        <div id="pdfEmbed" class="mt-4" style="display: none;">
+            <h4>Generated PDF:</h4>
+            <iframe id="pdfViewer" src="" width="100%" height="600px" style="border: 1px solid #ddd;"></iframe>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-5 text-center">
+            <p class="text-muted">
+                Made with ❤️ by <a href="https://github.com/chhatramani01" target="_blank">Chhatramani Yadav</a>.
+                Ideas while wasting time analyzing questions. 😄
+            </p>
+        </footer>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="settingsForm">
+                        <div class="mb-3">
+                            <label for="apiKey" class="form-label">API Key</label>
+                            <input type="text" class="form-control" id="apiKey" placeholder="Enter your API key">
+                        </div>
+                        <div class="mb-3">
+                            <label for="modelName" class="form-label">Model Name</label>
+                            <select class="form-select" id="modelName">
+                                <option value="gemini-2.0-flash-exp">Gemini 2.0 Flash Exp</option>
+                                <option value="gemini-1.5-flash" selected>Gemini 1.5 Flash</option>
+                                <option value="gemini-1.5-flash-8b">Gemini 1.5 Flash 8B</option>
+                                <option value="gemini-1.5-flash-latest">Gemini 1.5 Flash Latest</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveSettings">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
