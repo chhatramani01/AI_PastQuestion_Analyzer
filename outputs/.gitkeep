@@ -1,0 +1,4 @@
+touch uploads/.gitkeep
+touch outputs/.gitkeep
+touch download/.gitkeep
+touch images/.gitkeep
